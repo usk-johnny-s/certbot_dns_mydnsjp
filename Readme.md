@@ -15,7 +15,7 @@ To install this plugin, please perform one of the installation steps below.
 
 Please note that certbot is required to run the plugin. Please check [the certbot documentation](https://eff-certbot.readthedocs.io/en/latest/install.html) for certbot installation instructions.
 
-### Install with snap
+### snap
 Add the plugin using snap to certbot installed using snap.
 ```commandline
 snap install certbot-dns-mydnsjp
@@ -24,12 +24,19 @@ snap connect certbot:plugin certbot-dns-mydnsjp
 snap connect certbot-dns-mydnsjp:certbot-metadata certbot:certbot-metadata
 ```
 
-### Install with pip
+### Docker
+Get a pre-built image (including certbot).
+```commandline
+docker image pull uskjohnnys/certbot-dns-mydnsjp
+```
+
+### pip
 Add the plugin with pip to certbot installed with pip.
 ```commandline
 pip install certbot-dns-mydnsjp
 ```
-### Install from source code
+
+### from source code
 Add the plugin using pip from the source code to certbot installed using pip.
 ```commandline
 git clone https://github.com/usk-johnny-s/certbot_dns_mydnsjp
@@ -281,13 +288,47 @@ cd certbot_dns_mydnsjp
 snapcraft
 ```
 
+<details><summary>snapパッケージの公開</summary>
+
+GUIデスクトップでkeyringを初期化
+```commandline
+gnome-keyring-daemon --unlock
+```
+
+SnapStoreのログイン情報をkeyringに登録
+```commandline
+snapcraft login
+```
+
+SnapStoreのWebでパッケージ名を申請（承認されてからパッケージを送信）
+
+SnapStoreにパッケージを送信
+```commandline
+snapcraft login
+snapcraft upload --release=stable certbot-dns-mydnsjp_*_amd64.snap
+```
+</details>
+
 ### Dockerイメージのビルド
 [Dockerをインストール](https://docs.docker.com/get-docker/)してから、下記を実行します。
 ```commandline
 git clone https://github.com/usk-johnny-s/certbot_dns_mydnsjp
 cd certbot_dns_mydnsjp
-docker build -t certbot-dns-mydnsjp:local .
+docker build -t uskjohnnys/certbot-dns-mydnsjp:latest .
 ```
+
+<details><summary>Dockerイメージの公開</summary>
+
+DockerHubにログイン
+```commandline
+docker login
+```
+
+DockerHubにイメージを送信
+```commandline
+docker push uskjohnnys/certbot-dns-mydnsjp:latest
+```
+</details>
 
 ### Pythonパッケージのビルド
 [setuptoolsをインストール](https://setuptools.pypa.io/en/latest/userguide/quickstart.html)してから、下記を実行します。
@@ -296,6 +337,21 @@ git clone https://github.com/usk-johnny-s/certbot_dns_mydnsjp
 cd certbot_dns_mydnsjp
 python -m build
 ```
+
+<details><summary>Pythonパッケージの公開</summary>
+
+PyPIのログイン情報を~/.pypircに記入
+```ini
+[pypi]
+  username = __token__
+  password = ＜pypiログイントークン＞
+```
+
+PyPIにパッケージを送信
+```commandline
+python3 -m twine upload --repository pypi dist/*
+```
+</details>
 
 ## 謝辞
 
