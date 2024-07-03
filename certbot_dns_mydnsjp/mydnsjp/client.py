@@ -43,7 +43,6 @@ class UpdateMyDnsJpError(Exception):
         self.message = message
         super().__init__(self.message)
 
-
 class MyDNSJPClient:
     """
     Client for clearing, setting the TXT record using MyDNS.JP.
@@ -75,6 +74,8 @@ class MyDNSJPClient:
             if result_key is None or len(cred_key) > len(result_key):
                 result = cred_val
                 result_key = cred_key
+        if result is None:
+            raise UpdateMyDnsJpError(f"Not found mydnsjp_credential for domain '{domain}'")
         return result
 
     def set_txt_record(self, credential: dict, domain: str, content: str) -> str:
