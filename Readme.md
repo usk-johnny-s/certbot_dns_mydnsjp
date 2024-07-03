@@ -72,7 +72,7 @@ To perform zone separation for subdomains on MyDNS.JP, log in to MyDNS.JP and ad
 
 If you want to obtain certificates for both the parent account's domain and the child account's subdomain, please include the authentication information for both the parent account and child account in the MyDnsJp account configuration file.
 ```ini
-[dns_mydns_credential]
+[dns_mydnsjp_credential]
 [[example.mydns.jp]]
 'id'='mydns_jp_masterid'
 'pwd'='mydns_jp_masterpassword'
@@ -232,7 +232,7 @@ MyDNS.JPにLOGINしてDOMAIN INFO画面で「Hostname=サブレベルドメイ�
 
 親アカウントのドメインと子アカウントのサブドメインの両方の証明書を取得する場合は、親アカウントと子アカウントの両方の認証情報をMyDnsJpアカウント設定ファイルに記載してください。
 ```ini
-[dns_mydns_credential]
+[dns_mydnsjp_credential]
 [[example.mydns.jp]]
 'id'='mydns_jp_masterid'
 'pwd'='mydns_jp_masterpassword'
